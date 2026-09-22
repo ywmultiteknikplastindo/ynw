@@ -4,10 +4,12 @@
 
 const COMPANY_CONFIG = {
   name: "PT YnW Multi Teknik Plastindo",
-  whatsapp: "6281179760063",
-  whatsappDisplay: "+62 811-7976-0063",
   whatsappWisnu: "6282376917339",
   whatsappWisnuDisplay: "+62 823-7691-7339",
+  whatsappYayat: "628117960063",
+  whatsappYayatDisplay: "+62 811-7960-063",
+  whatsapp: "6281179760063",
+  whatsappDisplay: "+62 811-7976-0063",
   email: "yw.multiteknikplastindo@gmail.com",
   address: "Bandar Lampung, Lampung, Indonesia"
 };
@@ -121,13 +123,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const targetSelect = document.getElementById("quoteTarget");
-      const targetNumber = (targetSelect && targetSelect.value === "admin")
-        ? COMPANY_CONFIG.whatsapp
-        : COMPANY_CONFIG.whatsappWisnu;
+      let targetNumber = COMPANY_CONFIG.whatsappWisnu;
+      let recipientName = "Pak Wisnu (" + COMPANY_CONFIG.name + ")";
 
-      const recipientName = (targetSelect && targetSelect.value === "admin")
-        ? COMPANY_CONFIG.name
-        : "Pak Wisnu (" + COMPANY_CONFIG.name + ")";
+      if (targetSelect) {
+        if (targetSelect.value === "yayat") {
+          targetNumber = COMPANY_CONFIG.whatsappYayat;
+          recipientName = "Pak Yayat Saputra (" + COMPANY_CONFIG.name + ")";
+        } else if (targetSelect.value === "admin") {
+          targetNumber = COMPANY_CONFIG.whatsapp;
+          recipientName = COMPANY_CONFIG.name;
+        }
+      }
 
       // Format WhatsApp Message
       const lines = [
