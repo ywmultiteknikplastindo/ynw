@@ -2,6 +2,19 @@
 // PT YnW Multi Teknik Plastindo - Main Interactive Script
 // ============================================================
 
+// Clean URL normalizer: removes .html from address bar if accessed directly
+(function normalizeCleanURL() {
+  if (typeof window === 'undefined' || !window.location || !window.history.replaceState) return;
+  const path = window.location.pathname;
+  if (path.endsWith('/index.html')) {
+    const cleanPath = path.replace(/\/index\.html$/, '/') || '/';
+    window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+  } else if (path.endsWith('.html')) {
+    const cleanPath = path.replace(/\.html$/, '');
+    window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+  }
+})();
+
 const COMPANY_CONFIG = {
   name: "PT YnW Multi Teknik Plastindo",
   whatsappWisnu: "6282376917339",
